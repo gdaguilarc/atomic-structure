@@ -1,6 +1,6 @@
 // Just to abstract the functionality
 // I tried having the engine as a component instead of inheriting from it, but it just makes things harder
-class ADEngine extends BABYLON.Engine {
+class ADEngine {
 
     // TODO: Check if we should further abstract the scene into something like World
     constructor(canvas) {
