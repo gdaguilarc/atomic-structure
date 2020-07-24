@@ -19,11 +19,11 @@ class ADScene extends THREE.Scene {
       new THREE.Vector3(0, 0, 0),
       new THREE.Vector3(0, 0, 0),
       new THREE.Vector3(0, 0, 0),
-      1
+      20
     );
 
     this.moonPhysicsBody = new Mover(
-      new THREE.Vector3(2, 0, 0),
+      new THREE.Vector3(5, 0, 0),
       new THREE.Vector3(0, 0, 0),
       new THREE.Vector3(0, 0, 0),
       1
@@ -34,13 +34,23 @@ class ADScene extends THREE.Scene {
     this.pointLightHelper = new THREE.PointLightHelper(this.pointLight1, 0.1);
     this.pointLight1.position.set(0, 3, 0);
 
-    this.moonAttractor = new Attractor(20, 0.4, new THREE.Vector3(0, 0, 0));
+    this.moonAttractor = new Attractor(
+      this.spherePhysicsBody.mass,
+      0.4,
+      this.spherePhysicsBody.location
+    );
+    this.sphereAttractor = new Attractor(
+      this.spherePhysicsBody.mass,
+      2,
+      this.spherePhysicsBody.location
+    );
+
     this.moonGeometry = new THREE.SphereGeometry(0.3, 21, 21);
     this.moon = new THREE.Mesh(
       this.moonGeometry,
       new THREE.MeshBasicMaterial({ color: "blue" })
     );
-    this.moon.position.set(2, 0, 0);
+    this.moon.position.set(5, 0, 0);
 
     this.angle = 0;
     this.add(this.sphere);
@@ -55,8 +65,10 @@ class ADScene extends THREE.Scene {
     // this.spherePhysicsBody.applyForce(new THREE.Vector3(0, -0.05, 0));
     //   this.moonPhysicsBody
 
-    const attractionForce = this.moonAttractor.attract(this.moonPhysicsBody);
+    const attractionForce = this.sphereAttractor.attract(this.moonPhysicsBody);
+
     this.moonPhysicsBody.applyForce(attractionForce);
+
     this.moonPhysicsBody.update(delta);
     this.moon.position.set(
       this.moonPhysicsBody.location.x,

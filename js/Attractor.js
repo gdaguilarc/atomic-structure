@@ -12,7 +12,9 @@ class Attractor {
     let distance = force.length();
     distance = clamp(distance, 5, 15);
     force.normalize();
-
+    console.log(force);
+    console.log(mover);
+    console.log(this);
     const strength =
       (this.gravity * this.mass * mover.mass) / (distance * distance);
 
