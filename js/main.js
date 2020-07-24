@@ -8,14 +8,15 @@ class Main {
         // SCENE
         this.scene = new ADScene(canvas);
 
-        this.render.bind(this);
+        this.run = this.run.bind(this);
+        this.resize = this.resize.bind(this);
     }
 
 
     run() {
         // ACTION
         this.render();
-        requestAnimationFrame(() => { this.run() });
+        requestAnimationFrame(this.run);
     }
 
     render() {
@@ -23,7 +24,6 @@ class Main {
     }
 
     resize() {
-        console.log(this);
         this.canvas.height = window.innerHeight;
         this.canvas.width = window.innerWidth;
         this.engine.setSize(this.canvas.width, this.canvas.height);
