@@ -8,6 +8,7 @@ class Main {
         // SCENE
         this.scene = new ADScene(canvas);
 
+        // This makes the calling context always equal to the instance
         this.run = this.run.bind(this);
         this.resize = this.resize.bind(this);
     }
