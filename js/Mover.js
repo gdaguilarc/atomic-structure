@@ -20,7 +20,8 @@ class Mover {
   }
 
   applyForce(force) {
-    force.divideScalar(this.mass);
-    this.acceleration.add(force);
+    const copyForce = force.clone();
+    copyForce.divideScalar(this.mass);
+    this.acceleration.add(copyForce);
   }
 }
