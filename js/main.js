@@ -18,7 +18,7 @@ class Main {
 
 
     run(timestamp) {
-        // Make animations time dependent
+        // Make animations time dependent. We reference delta time in seconds
         const delta = (timestamp - this.previousTimestamp) / 1000;
 
         // ACTION
