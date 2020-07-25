@@ -13,7 +13,7 @@ class ADScene extends THREE.Scene {
     this.scenceLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
 
     this.world = new World(this);
-    SCENE_OBJECT_FACTORY.createSkyBox(this.world);
+    SceneObjectFactory.getInstance(this.world).createSkyBox();
 
     this.add(this.scenceLight);
   }
