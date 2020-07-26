@@ -2,7 +2,7 @@ class Mover {
   constructor(
     location,
     velocity = new THREE.Vector3(0, 0, 0),
-    acceleration,
+    acceleration = new THREE.Vector3(0, 0, 0),
     mass
   ) {
     this.location = location;

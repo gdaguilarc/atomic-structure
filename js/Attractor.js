@@ -10,7 +10,7 @@ class Attractor {
     const force = this.location.clone();
     force.sub(mover.location);
     let distance = force.length();
-    distance = clamp(distance, 5, 15);
+    distance = clamp(distance, 8, 20);
     force.normalize();
 
     const strength =
