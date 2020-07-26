@@ -18,23 +18,13 @@ class ADScene extends THREE.Scene {
     factory.createSkyBox();
     const electron = factory.createElectron(
       new THREE.Vector3(7, 0, 0),
-      new THREE.Vector3(0.5, 0.5, 0.5),
-      2
+      new THREE.Vector3(0.5, 0.5, 0.25),
+      5
     );
-    let mover = null;
-    electron.components.forEach((component) => {
-      if (component instanceof CoMover) {
-        mover = component;
-      }
-    });
+    let mover = electron.findComponent(CoMover.prototype);
 
     const nuclei = factory.createNuclei(15, 5);
-    let attractor = null;
-    nuclei.components.forEach((component) => {
-      if (component instanceof CoAttractor) {
-        attractor = component;
-      }
-    });
+    let attractor = nuclei.findComponent(CoAttractor.prototype);
 
     attractor.movers.push(mover);
 

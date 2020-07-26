@@ -8,4 +8,14 @@ class SceneObject {
       component.init();
     });
   }
+
+  findComponent(type) {
+    let result = null;
+    this.components.forEach((component) => {
+      if (Object.getPrototypeOf(component) === type) {
+        result = component;
+      }
+    });
+    return result;
+  }
 }
