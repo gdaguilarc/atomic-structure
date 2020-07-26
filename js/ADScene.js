@@ -16,44 +16,33 @@ class ADScene extends THREE.Scene {
     const factory = SceneObjectFactory.getInstance();
     factory.init(this.world);
     factory.createSkyBox();
-
-    this.earth = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 21, 21),
-      new THREE.MeshBasicMaterial({ color: 0xffff00 })
-    );
-
-    this.earth.position.set(0, 0, 0);
-    this.earthAttractor = new Attractor(15, 5, this.earth.position);
-
-    this.moon = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 21, 21),
-      new THREE.MeshBasicMaterial({ color: "blue" })
-    );
-
-    this.moon.position.set(7, 0, 0);
-
-    this.moonBody = new Mover(
-      this.moon.position,
-      new THREE.Vector3(0.5, 0.5, 0.25),
-      new THREE.Vector3(0, 0, 0),
+    const electron = factory.createElectron(
+      new THREE.Vector3(7, 0, 0),
+      new THREE.Vector3(0.5, 0.5, 0.5),
       2
     );
+    let mover = null;
+    electron.components.forEach((component) => {
+      if (component instanceof CoMover) {
+        mover = component;
+      }
+    });
+
+    const nuclei = factory.createNuclei(15, 5);
+    let attractor = null;
+    nuclei.components.forEach((component) => {
+      if (component instanceof CoAttractor) {
+        attractor = component;
+      }
+    });
+
+    attractor.movers.push(mover);
 
     this.add(this.scenceLight);
-    this.add(this.earth);
-    this.add(this.moon);
   }
 
   update(delta) {
     this.world.update(delta);
-    const force = this.earthAttractor.attract(this.moonBody);
-    this.moonBody.applyForce(force);
-    this.moonBody.update(delta);
-    this.moon.position.set(
-      this.moonBody.location.x,
-      this.moonBody.location.y,
-      this.moonBody.location.z
-    );
   }
 
   resize() {
