@@ -10,11 +10,7 @@ class CoAttractor extends Component {
   }
 
   init() {
-    this.sceneObject.components.forEach((component) => {
-      if (component instanceof CoTransform) {
-        this.coTransform = component;
-      }
-    });
+    this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
     CoAttractor.components.push(this);
   }
 

@@ -11,16 +11,13 @@ class CoMover extends Component {
   }
 
   init() {
-    this.sceneObject.components.forEach((component) => {
-      if (component instanceof CoTransform) {
-        this.coTransform = component;
-      }
-    });
+    this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
     CoMover.components.push(this);
   }
 
   update(delta) {
     const constantAcceleration = this.acceleration.clone();
+    // Make it a time based acceleration
     constantAcceleration.multiplyScalar(delta);
     this.velocity.add(constantAcceleration);
     this.coTransform.location.add(this.velocity);

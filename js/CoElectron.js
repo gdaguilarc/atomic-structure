@@ -11,11 +11,7 @@ class CoElectron extends Component {
   }
 
   init() {
-    this.sceneObject.components.forEach((component) => {
-      if (component instanceof CoTransform) {
-        this.coTransform = component;
-      }
-    });
+    this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
 
     this.sceneObject.world.scene.add(this.electron);
     CoElectron.components.push(this);

@@ -28,6 +28,27 @@ class ADScene extends THREE.Scene {
 
     attractor.movers.push(mover);
 
+    // GUI
+    guiControls = {
+      lightFrontColor: "#ffffff",
+      lightFrontIntensity: 0.75,
+      loadFile: function () {
+        document.getElementById("inputFile").click();
+      },
+    };
+    var datGui = new dat.GUI();
+    var sliderLightFrontIntensity = datGui
+      .add(guiControls, "lightFrontIntensity")
+      .min(0)
+      .max(1)
+      .step(0.1)
+      .name("Front Light Intensity");
+    var colorLightFront = datGui
+      .addColor(guiControls, "lightFrontColor")
+      .name("Front Light Color");
+    datGui.add(guiControls, "loadFile").name("Load OBJ 3D Model");
+    datGui.close();
+
     this.add(this.scenceLight);
   }
 
