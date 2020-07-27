@@ -23,7 +23,7 @@ class World {
     CoSubparticleSpawner.components.forEach((component) => {
       component.update(delta);
     });
-    CoMover.components.forEach((component) => {
+    CoOrbiter.components.forEach((component) => {
       component.update(delta);
     });
     CoNuclei.components.forEach((component) => {

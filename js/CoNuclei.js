@@ -4,6 +4,7 @@ class CoNuclei extends Component {
   constructor(sceneObject) {
     super(sceneObject);
     this.coTransform = null;
+    this.diameter = null;
 
     this.nucleiVertexShader = `
       varying vec3 v_n_position;
@@ -85,7 +86,7 @@ float flow(in vec3 p, in float t)
 	vec3 bp = p;
 	for (float i= 1.;i < 5.;i++ )
 	{
-		p += u_time*.1;
+		p += u_time*.2;
 		rz+= (sin(noise(p+t*0.8)*6.)*0.5+0.5) /z;
 		p = mix(bp,p,0.6);
 		z *= 2.;
@@ -96,9 +97,9 @@ float flow(in vec3 p, in float t)
 }
 
 void main(void) {    
-    vec3 color = vec3(0.2, 0.3, 1.0);
+    vec3 color = vec3(abs(sin(u_time) - 0.5), 0, 0.);
     float d = distance(v_n_position, (vec3(0.0,-1.0,0.0)*1.5))/3.0;
-    color = mix(color, vec3(0.0, 0.0, 0.6), d);
+    color = mix(color, vec3(abs(sin(u_time) / 0.5), 0.0, 0.0), d);
     vec3 wp = v_n_position;
     wp.y+=u_time*0.1;
     float n = flow(wp*vec3(0.6, 3.5, 0.6)*6.0, u_time*0.05);
@@ -116,8 +117,12 @@ void main(void) {
       u_time: { value: 0.0 },
     };
 
+    this.nuclei = null;
+  }
+
+  init() {
     this.nuclei = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 32, 32),
+      new THREE.SphereGeometry(30, 32, 32),
       new THREE.ShaderMaterial({
         vertexShader: this.nucleiVertexShader,
         fragmentShader: this.nucleiFragmentShader,
@@ -125,9 +130,7 @@ void main(void) {
         side: THREE.DoubleSide,
       })
     );
-  }
 
-  init() {
     this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
 
     this.sceneObject.world.scene.add(this.nuclei);

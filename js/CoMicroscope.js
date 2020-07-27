@@ -5,13 +5,9 @@ class CoMicroscope extends Component {
 
   init() {
     this.loadObj("./models/obj/micro/", "scope").then((myObj) => {
-      myObj.traverse(function (child) {
-        if (child.isMesh) {
-          child.material = new THREE.MeshBasicMaterial({ wireframe: true });
-        }
-      });
       myObj.scale.set(2, 2, 2);
-      myObj.position.z = -1000;
+      myObj.position.z = -200;
+      myObj.position.y = -80;
       this.sceneObject.world.scene.add(myObj);
     });
   }

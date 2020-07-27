@@ -9,7 +9,7 @@ class ADScene extends THREE.Scene {
       30000
     );
 
-    this.camera.position.set(0, 0, 200);
+    this.camera.position.set(0, 0, 300);
 
     new THREE.OrbitControls(this.camera, canvas);
     this.scenceLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
@@ -19,7 +19,7 @@ class ADScene extends THREE.Scene {
     factory.init(this.world);
     factory.createSkyBox();
 
-    const nuclei = factory.createNuclei(1000, 5);
+    const nuclei = factory.createNuclei(1000, 10, 100);
     factory.createSubparticleSpawner(nuclei);
     factory.createMicroscope();
 

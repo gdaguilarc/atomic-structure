@@ -15,8 +15,9 @@ class SceneObjectFactory {
     this.world = world;
   }
 
-  createNuclei(mass, gravity) {
+  createNuclei(mass, gravity, diameter) {
     const nuclei = new SceneObject(this.world);
+
     const transform = new CoTransform(nuclei);
     transform.location = new THREE.Vector3(0, 0, 0);
     nuclei.components.push(transform);
@@ -25,6 +26,8 @@ class SceneObjectFactory {
     attractor.gravity = gravity;
     nuclei.components.push(attractor);
     nuclei.components.push(new CoNuclei(nuclei));
+    nuclei.diameter = diameter * 2;
+    console.log(nuclei);
     nuclei.init();
     return nuclei;
   }
@@ -42,7 +45,7 @@ class SceneObjectFactory {
     const transform = new CoTransform(obj);
     transform.location = location;
     obj.components.push(transform);
-    const mover = new CoMover(obj);
+    const mover = new CoOrbiter(obj);
     mover.velocity = velocity;
     mover.acceleration = new THREE.Vector3(0, 0, 0);
     mover.mass = mass;

@@ -1,14 +1,17 @@
 class Main {
-  constructor(canvas) {
+  constructor(canvas, canvasHUD) {
     this.previousTimestamp = 0;
+
     // RENDERER ENGINE
     this.canvas = canvas;
-    this.engine = new THREE.WebGLRenderer({ canvas });
+    this.engine = new THREE.WebGLRenderer({ canvas, antialias: false });
     this.engine.setSize(window.innerWidth, window.innerHeight);
     this.engine.setClearColor(new THREE.Color(0.2, 0.2, 0.35), 1);
+    this.engine.autoClear = false;
 
     // SCENE
     this.scene = new ADScene(canvas);
+    this.sceneHUD = new ADSceneHUD(canvasHUD);
 
     // This makes the calling context always equal to the instance
     this.run = this.run.bind(this);
@@ -27,6 +30,7 @@ class Main {
 
   render(delta) {
     this.engine.render(this.scene, this.scene.camera);
+    this.engine.render(this.sceneHUD, this.sceneHUD.camera);
     this.scene.update(delta);
   }
 
