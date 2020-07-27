@@ -32,7 +32,11 @@ class ADScene extends THREE.Scene {
   }
 
   update(delta) {
+    // Update the input
+    InputManager.getInstance().update();
     this.world.update(delta);
+    // Saves previous state
+    InputManager.getInstance().lateUpdate();
   }
 
   resize() {

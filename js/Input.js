@@ -8,7 +8,7 @@ const InputKeyCode = {
   UpArrow: 5,
   DownArrow: 6,
   K: 7,
-  L: 8,
+  J: 8,
 };
 
 // Up to 32 states, we won't need more buttons in this case
@@ -24,7 +24,7 @@ const InputKeyCodeBitwise = {
   UpArrow: 1 << InputKeyCode.UpArrow,     // 0000 0010 0000
   DownArrow: 1 << InputKeyCode.DownArrow, // 0000 0100 0000
   K: 1 << InputKeyCode.K,                 // 0000 1000 0000
-  L: 1 << InputKeyCode.L,                 // 0001 0000 0000
+  J: 1 << InputKeyCode.J,                 // 0001 0000 0000
 };
 
 class Input {
@@ -45,7 +45,7 @@ class Input {
 
   isKeyDown(keyCode) {
     // Do a bit operation to check if that specific bit is turned on
-    return this.keyboardState & (1 << InputKeyCodeBitwise[keyCode]);
+    return this.keyboardState & (1 << keyCode);
   }
 
   // We need to check if that key was not pressed in the previous frame, but clicked only on this one
@@ -53,13 +53,13 @@ class Input {
   // Question: Why is it so hard for the browsers to do this properly for every platform?
   isKeyPressed(keyCode) {
     // Do a bit operation to check if that specific bit is turned on
-    return (this.keyboardState & (1 << InputKeyCodeBitwise[keyCode])) && !(this.previousKeyboardState & (1 << InputKeyCodeBitwise[keyCode]));
+    return (this.keyboardState & (1 << keyCode)) && !(this.previousKeyboardState & (1 << keyCode));
   }
 
   // Down on the previous frame, but released in the current frame
   isKeyUp(keyCode) {
     // Do a bit operation to check if that specific bit is turned on
-    return !(this.keyboardState & (1 << InputKeyCodeBitwise[keyCode])) && (this.previousKeyboardState & (1 << InputKeyCodeBitwise[keyCode]));
+    return !(this.keyboardState & (1 << keyCode)) && (this.previousKeyboardState & (1 << keyCode));
   }
 
 }
