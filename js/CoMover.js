@@ -20,23 +20,19 @@ class CoMover extends Component {
     // Make it a time based acceleration
     constantAcceleration.multiplyScalar(delta);
     this.velocity.add(constantAcceleration);
+    this.velocity.clampLength(0, 40);
+
     this.coTransform.location.add(this.velocity);
     this.acceleration.multiplyScalar(0);
-
-    if (Input.getInstance().isKeyPressed(InputKeyCode.K)) {
-      console.log('K pressed');
-    }
-    if (Input.getInstance().isKeyDown(InputKeyCode.K)) {
-      console.log('K down');
-    }
-    if (Input.getInstance().isKeyUp(InputKeyCode.K)) {
-      console.log('K up');
-    }
   }
 
   applyForce(force) {
     const copyForce = force.clone();
     copyForce.divideScalar(this.mass);
     this.acceleration.add(copyForce);
+  }
+
+  destroy() {
+    this.removeComponentFrom(CoMover.components);
   }
 }

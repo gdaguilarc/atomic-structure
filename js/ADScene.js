@@ -6,9 +6,11 @@ class ADScene extends THREE.Scene {
       45,
       canvas.width / canvas.height,
       1,
-      2000
+      30000
     );
-    this.camera.position.set(0, -1, 6);
+
+    this.camera.position.set(0, 0, 200);
+
     new THREE.OrbitControls(this.camera, canvas);
     this.scenceLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
 
@@ -16,17 +18,9 @@ class ADScene extends THREE.Scene {
     const factory = SceneObjectFactory.getInstance();
     factory.init(this.world);
     factory.createSkyBox();
-    const electron = factory.createElectron(
-      new THREE.Vector3(7, 0, 0),
-      new THREE.Vector3(0.5, 0.5, 0.25),
-      5
-    );
-    let mover = electron.findComponent(CoMover.prototype);
 
-    const nuclei = factory.createNuclei(15, 5);
-    let attractor = nuclei.findComponent(CoAttractor.prototype);
-
-    attractor.movers.push(mover);
+    const nuclei = factory.createNuclei(1000, 5);
+    factory.createSubparticleSpawner(nuclei);
 
     this.add(this.scenceLight);
   }
@@ -37,6 +31,8 @@ class ADScene extends THREE.Scene {
     this.world.update(delta);
     // Saves previous state
     InputManager.getInstance().lateUpdate();
+
+    this.world.freeMemory();
   }
 
   resize() {

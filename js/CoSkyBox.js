@@ -109,7 +109,7 @@ class CoSkyBox extends Component {
     };
 
     this.sky = new THREE.Mesh(
-      new THREE.SphereGeometry(1000, 32, 32),
+      new THREE.SphereGeometry(2000, 32, 32),
       new THREE.ShaderMaterial({
         vertexShader: this.skyBoxVertexShader,
         fragmentShader: this.skyBoxFragmentShader,
@@ -126,5 +126,12 @@ class CoSkyBox extends Component {
 
   update(delta) {
     this.skyboxUniforms.u_time.value += delta;
+  }
+
+  destroy() {
+    this.sky.geometry.dispose();
+    this.sky.material.dispose();
+    this.sceneObject.world.scene.remove(this.sky);
+    this.removeComponentFrom(CoSkyBox.components);
   }
 }

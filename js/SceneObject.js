@@ -18,4 +18,12 @@ class SceneObject {
     });
     return result;
   }
+
+  destroy() {
+    for (let i = 0; i < this.components.length; ++i) {
+      this.components[i].destroy();
+      this.components[i] = null;
+    }
+    this.components = null;
+  }
 }

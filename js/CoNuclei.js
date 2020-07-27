@@ -143,4 +143,11 @@ void main(void) {
   update(delta) {
     this.nucleiUniforms.u_time.value += delta;
   }
+
+  destroy() {
+    this.nuclei.geometry.dispose();
+    this.nuclei.material.dispose();
+    this.sceneObject.world.scene.remove(this.nuclei);
+    this.removeComponentFrom(CoNuclei.components);
+  }
 }

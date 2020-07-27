@@ -1,6 +1,4 @@
 class CoAttractor extends Component {
-  static components = [];
-
   constructor(sceneObject) {
     super(sceneObject);
     this.mass = null;
@@ -11,13 +9,6 @@ class CoAttractor extends Component {
 
   init() {
     this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
-    CoAttractor.components.push(this);
-  }
-
-  update(delta) {
-    this.movers.forEach((mover) => {
-      mover.applyForce(this.attract(mover));
-    });
   }
 
   attract(mover) {

@@ -36,19 +36,33 @@ class SceneObjectFactory {
     return sky;
   }
 
-  createElectron(location, velocity, mass) {
-    const electron = new SceneObject(this.world);
-    const transform = new CoTransform(electron);
+  createElectron(location, velocity, mass, color) {
+    const obj = new SceneObject(this.world);
+
+    const transform = new CoTransform(obj);
     transform.location = location;
-    electron.components.push(transform);
-    const mover = new CoMover(electron);
+    obj.components.push(transform);
+    const mover = new CoMover(obj);
     mover.velocity = velocity;
     mover.acceleration = new THREE.Vector3(0, 0, 0);
     mover.mass = mass;
-    electron.components.push(mover);
-    electron.components.push(new CoElectron(electron));
+    obj.components.push(mover);
+    const electron = new CoElectron(obj);
+    electron.color = color;
+    obj.components.push(electron);
 
-    electron.init();
-    return electron;
+    obj.init();
+    return obj;
+  }
+
+  createSubparticleSpawner(nuclei) {
+    const spawner = new SceneObject(this.world);
+    const component = new CoSubparticleSpawner(spawner);
+    component.nuclei = nuclei;
+    spawner.components.push(component);
+
+    spawner.init();
+
+    return spawner;
   }
 }
