@@ -21,6 +21,7 @@ class ADScene extends THREE.Scene {
 
     const nuclei = factory.createNuclei(1000, 5);
     factory.createSubparticleSpawner(nuclei);
+    factory.createMicroscope();
 
     this.add(this.scenceLight);
   }

@@ -65,4 +65,10 @@ class SceneObjectFactory {
 
     return spawner;
   }
+
+  createMicroscope() {
+    const microscope = new SceneObject(this.world);
+    microscope.components.push(new CoMicroscope(microscope));
+    microscope.init();
+  }
 }
