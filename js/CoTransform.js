@@ -4,5 +4,6 @@ class CoTransform extends Component {
     this.location = new THREE.Vector3(0, 0, 0);
     this.translation = new THREE.Vector3(0, 0, 0);
     this.rotation = new THREE.Vector3(0, 0, 0);
+    this.rotationAngle = 0;
   }
 }

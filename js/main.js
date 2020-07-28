@@ -1,5 +1,5 @@
 class Main {
-  constructor(canvas, canvasHUD) {
+  constructor(canvas) {
     this.previousTimestamp = 0;
 
     // RENDERER ENGINE
@@ -11,7 +11,6 @@ class Main {
 
     // SCENE
     this.scene = new ADScene(canvas);
-    this.sceneHUD = new ADSceneHUD(canvasHUD);
 
     // This makes the calling context always equal to the instance
     this.run = this.run.bind(this);
@@ -30,7 +29,6 @@ class Main {
 
   render(delta) {
     this.engine.render(this.scene, this.scene.camera);
-    this.engine.render(this.sceneHUD, this.sceneHUD.camera);
     this.scene.update(delta);
   }
 

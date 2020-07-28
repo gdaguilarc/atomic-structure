@@ -9,6 +9,7 @@ const InputKeyCode = {
   DownArrow: 6,
   K: 7,
   J: 8,
+  P: 9,
 };
 
 // Up to 32 states, we won't need more buttons in this case
@@ -16,15 +17,16 @@ const InputKeyCode = {
 // So yeah, let's leave it at 64
 // We could represent this as booleans, but a boolean holds 8 bits, and we really only need one! 7 bits are wasted!
 const InputKeyCodeBitwise = {
-  Digit1: 1 << InputKeyCode.Digit1,       // 0000 0000 0001
-  Digit2: 1 << InputKeyCode.Digit2,       // 0000 0000 0010
-  Digit3: 1 << InputKeyCode.Digit3,       // 0000 0000 0100
-  W: 1 << InputKeyCode.W,                 // 0000 0000 1000
-  S: 1 << InputKeyCode.S,                 // 0000 0001 0000
-  UpArrow: 1 << InputKeyCode.UpArrow,     // 0000 0010 0000
+  Digit1: 1 << InputKeyCode.Digit1, // 0000 0000 0001
+  Digit2: 1 << InputKeyCode.Digit2, // 0000 0000 0010
+  Digit3: 1 << InputKeyCode.Digit3, // 0000 0000 0100
+  W: 1 << InputKeyCode.W, // 0000 0000 1000
+  S: 1 << InputKeyCode.S, // 0000 0001 0000
+  UpArrow: 1 << InputKeyCode.UpArrow, // 0000 0010 0000
   DownArrow: 1 << InputKeyCode.DownArrow, // 0000 0100 0000
-  K: 1 << InputKeyCode.K,                 // 0000 1000 0000
-  J: 1 << InputKeyCode.J,                 // 0001 0000 0000
+  K: 1 << InputKeyCode.K, // 0000 1000 0000
+  J: 1 << InputKeyCode.J, // 0001 0000 0000
+  P: 1 << InputKeyCode.P,
 };
 
 class Input {
@@ -53,13 +55,18 @@ class Input {
   // Question: Why is it so hard for the browsers to do this properly for every platform?
   isKeyPressed(keyCode) {
     // Do a bit operation to check if that specific bit is turned on
-    return (this.keyboardState & (1 << keyCode)) && !(this.previousKeyboardState & (1 << keyCode));
+    return (
+      this.keyboardState & (1 << keyCode) &&
+      !(this.previousKeyboardState & (1 << keyCode))
+    );
   }
 
   // Down on the previous frame, but released in the current frame
   isKeyUp(keyCode) {
     // Do a bit operation to check if that specific bit is turned on
-    return !(this.keyboardState & (1 << keyCode)) && (this.previousKeyboardState & (1 << keyCode));
+    return (
+      !(this.keyboardState & (1 << keyCode)) &&
+      this.previousKeyboardState & (1 << keyCode)
+    );
   }
-
 }

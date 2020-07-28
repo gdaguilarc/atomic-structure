@@ -35,13 +35,6 @@ class ADScene extends THREE.Scene {
       sound.play();
     });
 
-    factory.createElectron(
-      new THREE.Vector3(1, 1, 1).normalize(),
-      100,
-      10,
-      "blue"
-    );
-
     this.add(this.scenceLight);
   }
 
@@ -49,7 +42,8 @@ class ADScene extends THREE.Scene {
     // Update the input
     InputManager.getInstance().update();
 
-    if (Input.getInstance().isKeyPressed(InputKeyCode.Digit1)) {
+    if (Input.getInstance().isKeyPressed(InputKeyCode.P)) {
+      console.log("Pressed P");
       const context = new AudioContext();
       context.resume();
     }
