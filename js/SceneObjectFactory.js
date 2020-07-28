@@ -73,13 +73,18 @@ class SceneObjectFactory {
     obj.init();
   }
 
-  createNeutron(location) {
+  createNeutron(location, maxSpeed, maxForce, r) {
     const obj = new SceneObject(this.world);
 
     const transform = new CoTransform(obj);
     transform.location = location;
     obj.components.push(transform);
     obj.components.push(new CoNeutron(obj));
+    const vehicle = new CoVehicle(obj);
+    vehicle.maxSpeed = maxSpeed;
+    vehicle.maxForce = maxForce;
+    vehicle.r = r;
+    obj.components.push(vehicle);
     obj.init();
     return obj;
   }

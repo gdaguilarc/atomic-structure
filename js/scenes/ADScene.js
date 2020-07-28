@@ -24,8 +24,6 @@ class ADScene extends THREE.Scene {
     factory.createSubparticleSpawner(nuclei);
     factory.createMicroscope();
 
-    factory.createNeutron(new THREE.Vector3(100, 100, 100));
-
     // create an AudioListener and add it to the camera
     const listener = new THREE.AudioListener();
     this.camera.add(listener);

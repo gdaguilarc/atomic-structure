@@ -6,6 +6,8 @@ class CoSubparticleSpawner extends Component {
   constructor(sceneObject) {
     super(sceneObject);
     this.electrons = [];
+    this.vehicles = []; // Protons or neutrons
+    this.vehiclesComponents = [];
     this.level = 0;
 
     this.colors = ["blue", "green", "purple", "yellow"];
@@ -62,6 +64,19 @@ class CoSubparticleSpawner extends Component {
         EventEmitter.getInstance().emit("electronRemoved");
         this.sceneObject.world.destroy(popped);
       }
+    }
+    if (Input.getInstance().isKeyPressed(InputKeyCode.J)) {
+      const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
+      dir.normalize();
+      dir.multiplyScalar(100);
+      const vehicle = SceneObjectFactory.getInstance().createNeutron(dir, 2, 0.2, 3);
+      const vehicleComponent = vehicle.findComponent(CoVehicle.prototype);
+
+      this.vehicles.push(vehicle);
+      this.vehiclesComponents.push(vehicleComponent);
+    }
+    for (let i = 0; i < this.vehicles.length; ++i) {
+      this.vehiclesComponents[i].applyBehaviors(this.vehiclesComponents);
     }
   }
 

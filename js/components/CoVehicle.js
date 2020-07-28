@@ -29,7 +29,7 @@ class CoVehicle extends Component {
   applyBehaviors(vehicles) {
     const separateForce = this.separate(vehicles);
     const seekForce = this.seek(this.target);
-    separateForce.multiplyScalar(2);
+    separateForce.multiplyScalar(0.5);
     seekForce.multiplyScalar(1);
     this.applyForce(separateForce);
     this.applyForce(seekForce);
@@ -38,8 +38,14 @@ class CoVehicle extends Component {
   seek(target) {
     const desired = target.clone();
     desired.sub(this.coTransform.location);
+    const d = desired.length();
     desired.normalize();
-    desired.multiplyScalar(this.maxSpeed);
+    if (d < 100) {
+      const m = d.map(0, 100, 0, this.maxSpeed);
+      desired.multiplyScalar(m);
+    } else {
+      desired.multiplyScalar(this.maxSpeed);
+    }
 
     const steer = desired.clone();
     steer.sub(this.velocity);
@@ -54,12 +60,12 @@ class CoVehicle extends Component {
     let count = 0;
     // For every boid in the system, check if it's too close
     for (let i = 0; i < vehicles.length; ++i) {
-      const d = this.coTransform.location.distance(other.coTransform.location);
+      const d = this.coTransform.location.distanceTo(vehicles[i].coTransform.location);
       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
       if ((d > 0) && (d < desiredseparation)) {
         // Calculate vector pointing away from neighbor
         const diff = this.coTransform.location.clone();
-        diff.sub(other.coTransform.location);
+        diff.sub(vehicles[i].coTransform.location);
         diff.normalize();
         diff.divideScalar(d);        // Weight by distance
         sum.add(diff);
