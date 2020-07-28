@@ -6,8 +6,10 @@ class CoSubparticleSpawner extends Component {
   constructor(sceneObject) {
     super(sceneObject);
     this.electrons = [];
-    this.vehicles = []; // Protons or neutrons
-    this.vehiclesComponents = [];
+    this.neutrons = []; // Protons or neutrons
+    this.neutronsComponents = [];
+    this.protons = []; // Protons or protons
+    this.protonsComponents = [];
     this.level = 0;
 
     this.colors = ["blue", "green", "purple", "yellow"];
@@ -68,25 +70,32 @@ class CoSubparticleSpawner extends Component {
     if (Input.getInstance().isKeyPressed(InputKeyCode.J)) {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
-      dir.multiplyScalar(100);
-      const vehicle = SceneObjectFactory.getInstance().createProton(dir, 2, 0.2, 3);
-      const vehicleComponent = vehicle.findComponent(CoVehicle.prototype);
+      dir.multiplyScalar(300);
+      const proton = SceneObjectFactory.getInstance().createProton(dir, 2, 0.2, 3);
+      const protonComponent = proton.findComponent(CoVehicle.prototype);
 
-      this.vehicles.push(vehicle);
-      this.vehiclesComponents.push(vehicleComponent);
+      this.protons.push(proton);
+      this.protonsComponents.push(protonComponent);
+
+      EventEmitter.getInstance().emit("protonAdded");
     }
     if (Input.getInstance().isKeyPressed(InputKeyCode.K)) {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
-      dir.multiplyScalar(100);
-      const vehicle = SceneObjectFactory.getInstance().createNeutron(dir, 2, 0.2, 3);
-      const vehicleComponent = vehicle.findComponent(CoVehicle.prototype);
+      dir.multiplyScalar(300);
+      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 2, 0.2, 3);
+      const neutronComponent = neutron.findComponent(CoVehicle.prototype);
 
-      this.vehicles.push(vehicle);
-      this.vehiclesComponents.push(vehicleComponent);
+      this.neutrons.push(neutron);
+      this.neutronsComponents.push(neutronComponent);
+
+      EventEmitter.getInstance().emit("neutronAdded");
     }
-    for (let i = 0; i < this.vehicles.length; ++i) {
-      this.vehiclesComponents[i].applyBehaviors(this.vehiclesComponents);
+    for (let i = 0; i < this.protons.length; ++i) {
+      this.protonsComponents[i].applyBehaviors(this.protonsComponents);
+    }
+    for (let i = 0; i < this.neutrons.length; ++i) {
+      this.neutronsComponents[i].applyBehaviors(this.neutronsComponents);
     }
   }
 
