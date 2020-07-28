@@ -39,17 +39,16 @@ class SceneObjectFactory {
     return sky;
   }
 
-  createElectron(location, velocity, mass, color) {
+  createElectron(dir, distance, orbitSpeed, color) {
     const obj = new SceneObject(this.world);
 
     const transform = new CoTransform(obj);
-    transform.location = location;
     obj.components.push(transform);
-    const mover = new CoOrbiter(obj);
-    mover.velocity = velocity;
-    mover.acceleration = new THREE.Vector3(0, 0, 0);
-    mover.mass = mass;
-    obj.components.push(mover);
+    const orbiter = new CoOrbiter(obj);
+    orbiter.dir = dir;
+    orbiter.distance = distance;
+    orbiter.orbitSpeed = orbitSpeed;
+    obj.components.push(orbiter);
     const electron = new CoElectron(obj);
     electron.color = color;
     obj.components.push(electron);

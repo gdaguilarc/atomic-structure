@@ -13,13 +13,14 @@ class ADSceneHUD extends THREE.Scene {
     );
 
     this.context = canvas.getContext("2d");
-    this.context.font = "Normal 40px Arial";
+    this.context.font = "Normal 20px Arial";
     this.context.textAlign = "center";
-    this.context.fillStyle = "rgba(245,245,245,0.75)";
+    this.context.textBaseline = "top";
+    this.context.fillStyle = "rgba(245,245,245,1)";
     this.context.fillText(
-      "Initializing...",
+      "Atom Getting Splitted ...",
       canvas.width / 2,
-      canvas.height / 2
+      canvas.height / 8
     );
 
     // PLANE TO RENDER THE HUD
@@ -39,7 +40,7 @@ class ADSceneHUD extends THREE.Scene {
 
     this.add(this.plane);
   }
-
+  1;
   update(delta) {}
 
   resize() {

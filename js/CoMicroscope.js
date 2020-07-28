@@ -6,14 +6,14 @@ class CoMicroscope extends Component {
   init() {
     this.loadObj("./models/obj/micro/", "scope").then((myObj) => {
       myObj.scale.set(2, 2, 2);
-      myObj.position.z = -200;
+      myObj.position.z = -300;
       myObj.position.y = -80;
       this.sceneObject.world.scene.add(myObj);
     });
   }
 
   loadObj(path, fileName) {
-    var progress = console.log;
+    let progress = console.log;
 
     return new Promise(function (resolve, reject) {
       const mtlLoader = new THREE.MTLLoader();

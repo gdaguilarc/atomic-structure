@@ -8,7 +8,7 @@ class CoElectron extends Component {
   }
 
   init() {
-    this.geometry = new THREE.SphereGeometry(1, 21, 21);
+    this.geometry = new THREE.SphereGeometry(10, 21, 21);
     this.material = new THREE.MeshBasicMaterial({ color: this.color });
     this.electron = new THREE.Mesh(this.geometry, this.material);
     this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);
@@ -24,11 +24,26 @@ class CoElectron extends Component {
   }
 
   update(delta) {
-    this.electron.position.set(
-      this.coTransform.location.x,
-      this.coTransform.location.y,
-      this.coTransform.location.z
+    const r1 = new THREE.Matrix4();
+    r1.makeRotationAxis(
+      this.coTransform.rotation,
+      this.coTransform.rotationAngle
     );
+
+    const t1 = new THREE.Matrix4();
+    t1.makeTranslation(
+      this.coTransform.translation.x,
+      this.coTransform.translation.y,
+      this.coTransform.translation.z
+    );
+
+    const transformation = new THREE.Matrix4();
+    transformation.multiplyMatrices(r1, t1);
+
+    this.electron.matrix.copy(transformation);
+
+    this.electron.matrixAutoUpdate = false;
+    this.electron.updateMatrixWorld(true);
   }
 
   destroy() {
