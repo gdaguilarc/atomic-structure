@@ -72,7 +72,7 @@ class CoSubparticleSpawner extends Component {
     if (Input.getInstance().isKeyPressed(InputKeyCode.J)) {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
-      dir.multiplyScalar(300);
+      dir.multiplyScalar(150);
       const proton = SceneObjectFactory.getInstance().createProton(dir, 3, 0.2, 8);
       const protonComponent = proton.findComponent(CoVehicle.prototype);
 
@@ -86,7 +86,7 @@ class CoSubparticleSpawner extends Component {
     if (Input.getInstance().isKeyPressed(InputKeyCode.K)) {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
-      dir.multiplyScalar(300);
+      dir.multiplyScalar(150);
       const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 3, 0.2, 8);
       const neutronComponent = neutron.findComponent(CoVehicle.prototype);
 
