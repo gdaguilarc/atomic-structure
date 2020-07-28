@@ -35,6 +35,7 @@ class CoSubparticleSpawner extends Component {
       );
 
       this.electrons.push(electron);
+      EventEmitter.getInstance().emit("electronAdded");
 
       if (
         this.electrons.length == 2 ||

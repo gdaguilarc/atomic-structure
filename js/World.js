@@ -32,5 +32,8 @@ class World {
     CoElectron.components.forEach((component) => {
       component.update(delta);
     });
+    CoGUI.components.forEach((component) => {
+      component.update(delta);
+    });
   }
 }

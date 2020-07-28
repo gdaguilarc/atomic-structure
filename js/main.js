@@ -29,6 +29,7 @@ class Main {
 
   render(delta) {
     this.engine.render(this.scene, this.scene.camera);
+    this.engine.render(this.scene.hud, this.scene.hudCamera);
     this.scene.update(delta);
   }
 

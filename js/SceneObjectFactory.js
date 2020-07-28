@@ -73,4 +73,10 @@ class SceneObjectFactory {
     microscope.components.push(new CoMicroscope(microscope));
     microscope.init();
   }
+
+  createGUI() {
+    const obj = new SceneObject(this.world);
+    obj.components.push(new CoGUI(obj));
+    obj.init();
+  }
 }

@@ -4,10 +4,25 @@ class CoMicroscope extends Component {
   }
 
   init() {
-    this.loadObj("./models/obj/micro/", "scope").then((myObj) => {
-      myObj.scale.set(2, 2, 2);
-      myObj.position.z = -300;
-      myObj.position.y = -80;
+    const cubeMaterials = [
+      new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_ft.png"),
+        side: THREE.DoubleSide,
+      }), // FRONT
+      new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_bk.png"),
+        side: THREE.DoubleSide,
+      }), // BACK
+      new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_up.png"),
+        side: THREE.DoubleSide,
+      }), // UP
+    ];
+
+    this.loadObj("./models/obj/orionxt8/", "orionxt8").then((myObj) => {
+      myObj.scale.set(40, 40, 40);
+      myObj.position.set(0, 1900, 7800);
+
       this.sceneObject.world.scene.add(myObj);
     });
   }
@@ -19,7 +34,7 @@ class CoMicroscope extends Component {
       const mtlLoader = new THREE.MTLLoader();
       mtlLoader.setPath(path);
 
-      mtlLoader.load(
+      mtlLoader.setMaterials(materials).load(
         fileName + ".mtl",
         function (materials) {
           materials.preload();
