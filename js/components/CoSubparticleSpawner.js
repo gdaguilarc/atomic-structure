@@ -40,8 +40,9 @@ class CoSubparticleSpawner extends Component {
 
   update(delta) {
     if (
-      Input.getInstance().isKeyPressed(InputKeyCode.UpArrow) ||
-      Input.getInstance().isKeyPressed(InputKeyCode.W)
+      (Input.getInstance().isKeyPressed(InputKeyCode.UpArrow) ||
+        Input.getInstance().isKeyPressed(InputKeyCode.W)) &&
+      this.protons < 118
     ) {
       const min = 100 * (this.level + 1);
       const max = 100 * (this.level + 1) + 70;

@@ -13,6 +13,7 @@ class CoGUI extends Component {
     this.protonRemoved = this.protonRemoved.bind(this);
     this.neutronAdded = this.neutronAdded.bind(this);
     this.neutronRemoved = this.neutronRemoved.bind(this);
+    this.elementManager = new Element();
   }
 
   init() {
@@ -71,21 +72,30 @@ class CoGUI extends Component {
 
   update(delta) {
     this.sceneObject.world.scene.hudContext.fillText(
-      `Electrons: ${this.electronCount}`,
+      `Element: ${this.elementManager.getElement(
+        this.protonCount,
+        this.electronCount
+      )}`,
       100,
       100
     );
 
     this.sceneObject.world.scene.hudContext.fillText(
-      `Protons: ${this.protonCount}`,
+      `Electrons: ${this.electronCount}`,
       100,
       200
     );
 
     this.sceneObject.world.scene.hudContext.fillText(
-      `Neutrons: ${this.neutronCount}`,
+      `Protons: ${this.protonCount}`,
       100,
       300
+    );
+
+    this.sceneObject.world.scene.hudContext.fillText(
+      `Neutrons: ${this.neutronCount}`,
+      100,
+      400
     );
   }
 

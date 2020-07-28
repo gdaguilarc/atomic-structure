@@ -109,7 +109,7 @@ class CoSkyBox extends Component {
     };
 
     this.sky = new THREE.Mesh(
-      new THREE.SphereGeometry(2000, 32, 32),
+      new THREE.SphereGeometry(2500, 32, 32),
       new THREE.ShaderMaterial({
         vertexShader: this.skyBoxVertexShader,
         fragmentShader: this.skyBoxFragmentShader,
