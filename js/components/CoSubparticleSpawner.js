@@ -10,6 +10,8 @@ class CoSubparticleSpawner extends Component {
     this.neutronsComponents = [];
     this.protons = []; // Protons or protons
     this.protonsComponents = [];
+    this.vehicles = [];
+    this.vehiclesComponents = [];
     this.level = 0;
 
     this.colors = ["blue", "green", "purple", "yellow"];
@@ -71,9 +73,11 @@ class CoSubparticleSpawner extends Component {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
       dir.multiplyScalar(300);
-      const proton = SceneObjectFactory.getInstance().createProton(dir, 2, 0.2, 3);
+      const proton = SceneObjectFactory.getInstance().createProton(dir, 3, 0.2, 10);
       const protonComponent = proton.findComponent(CoVehicle.prototype);
 
+      this.vehicles.push(proton);
+      this.vehiclesComponents.push(protonComponent);
       this.protons.push(proton);
       this.protonsComponents.push(protonComponent);
 
@@ -83,19 +87,18 @@ class CoSubparticleSpawner extends Component {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
       dir.multiplyScalar(300);
-      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 2, 0.2, 3);
+      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 3, 0.2, 2);
       const neutronComponent = neutron.findComponent(CoVehicle.prototype);
 
+      this.vehicles.push(neutron);
+      this.vehiclesComponents.push(neutronComponent);
       this.neutrons.push(neutron);
       this.neutronsComponents.push(neutronComponent);
 
       EventEmitter.getInstance().emit("neutronAdded");
     }
-    for (let i = 0; i < this.protons.length; ++i) {
-      this.protonsComponents[i].applyBehaviors(this.protonsComponents);
-    }
-    for (let i = 0; i < this.neutrons.length; ++i) {
-      this.neutronsComponents[i].applyBehaviors(this.neutronsComponents);
+    for (let i = 0; i < this.vehicles.length; ++i) {
+      this.vehiclesComponents[i].applyBehaviors(this.vehiclesComponents);
     }
   }
 

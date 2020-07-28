@@ -29,9 +29,9 @@ class CoVehicle extends Component {
   applyBehaviors(vehicles) {
     const separateForce = this.separate(vehicles);
     const seekForce = this.seek(this.target);
-    separateForce.multiplyScalar(0.1);
+    separateForce.multiplyScalar(1);
     seekForce.multiplyScalar(1);
-    // this.applyForce(separateForce);
+    this.applyForce(separateForce);
     this.applyForce(seekForce);
   }
 
@@ -78,10 +78,10 @@ class CoVehicle extends Component {
       sum.divideScalar(count);
       // Our desired vector is the average scaled to maximum speed
       sum.normalize();
-      sum.multiplyScalar(this.maxspeed);
+      sum.multiplyScalar(this.maxSpeed);
       // Implement Reynolds: Steering = Desired - Velocity
       sum.sub(this.velocity);
-      sum.clampLength(0, this.maxforce);
+      sum.clampLength(0, this.maxForce);
     }
     return sum;
   }
