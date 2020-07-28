@@ -8,7 +8,7 @@ class SceneObjectFactory {
     return SceneObjectFactory.instance;
   }
 
-  constructor() {}
+  constructor() { }
 
   // Must be called when retrieving the instance for the first time
   init(world) {
@@ -21,13 +21,6 @@ class SceneObjectFactory {
     const transform = new CoTransform(nuclei);
     transform.location = new THREE.Vector3(0, 0, 0);
     nuclei.components.push(transform);
-    const attractor = new CoAttractor(nuclei);
-    attractor.mass = mass;
-    attractor.gravity = gravity;
-    nuclei.components.push(attractor);
-    nuclei.components.push(new CoNuclei(nuclei));
-    nuclei.diameter = diameter * 2;
-    console.log(nuclei);
     nuclei.init();
     return nuclei;
   }
@@ -78,5 +71,16 @@ class SceneObjectFactory {
     const obj = new SceneObject(this.world);
     obj.components.push(new CoGUI(obj));
     obj.init();
+  }
+
+  createNeutron(location) {
+    const obj = new SceneObject(this.world);
+
+    const transform = new CoTransform(obj);
+    transform.location = location;
+    obj.components.push(transform);
+    obj.components.push(new CoNeutron(obj));
+    obj.init();
+    return obj;
   }
 }

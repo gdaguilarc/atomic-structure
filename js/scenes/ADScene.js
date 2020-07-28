@@ -1,6 +1,7 @@
 class ADScene extends THREE.Scene {
-  constructor(canvas) {
+  constructor(canvas, engine) {
     super();
+    this.engine = engine;
     this.canvas = canvas;
     this.camera = new THREE.PerspectiveCamera(
       45,
@@ -22,6 +23,8 @@ class ADScene extends THREE.Scene {
     const nuclei = factory.createNuclei(1000, 10, 50);
     factory.createSubparticleSpawner(nuclei);
     factory.createMicroscope();
+
+    factory.createNeutron(new THREE.Vector3(100, 100, 100));
 
     // create an AudioListener and add it to the camera
     const listener = new THREE.AudioListener();

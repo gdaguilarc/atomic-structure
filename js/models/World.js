@@ -32,6 +32,15 @@ class World {
     CoElectron.components.forEach((component) => {
       component.update(delta);
     });
+    CoVehicle.components.forEach((component) => {
+      component.update(delta);
+    });
+    CoProton.components.forEach((component) => {
+      component.update(delta);
+    });
+    CoNeutron.components.forEach((component) => {
+      component.update(delta);
+    });
     CoGUI.components.forEach((component) => {
       component.update(delta);
     });

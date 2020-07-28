@@ -10,7 +10,7 @@ class Main {
     this.engine.autoClear = false;
 
     // SCENE
-    this.scene = new ADScene(canvas);
+    this.scene = new ADScene(canvas, this.engine);
 
     // This makes the calling context always equal to the instance
     this.run = this.run.bind(this);
