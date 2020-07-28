@@ -73,7 +73,7 @@ class CoSubparticleSpawner extends Component {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
       dir.multiplyScalar(300);
-      const proton = SceneObjectFactory.getInstance().createProton(dir, 3, 0.2, 10);
+      const proton = SceneObjectFactory.getInstance().createProton(dir, 3, 0.2, 8);
       const protonComponent = proton.findComponent(CoVehicle.prototype);
 
       this.vehicles.push(proton);
@@ -87,7 +87,7 @@ class CoSubparticleSpawner extends Component {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
       dir.multiplyScalar(300);
-      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 3, 0.2, 2);
+      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 3, 0.2, 8);
       const neutronComponent = neutron.findComponent(CoVehicle.prototype);
 
       this.vehicles.push(neutron);
