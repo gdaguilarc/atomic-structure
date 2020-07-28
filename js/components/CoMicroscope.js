@@ -29,7 +29,6 @@ class CoMicroscope extends Component {
         .setMaterials(materials)
         .load(path + fileName + ".obj", (object) => {
           object.scale.set(50, 50, 50);
-          var texture = new THREE.TextureLoader().load(path + "tex.png");
 
           // object.traverse((child) => {
           //   // aka setTexture
@@ -38,7 +37,16 @@ class CoMicroscope extends Component {
           //   console.log("fdsj");
           //   child.material = texture;
           // });
-          object.material.map = texture;
+
+          // var texture = new THREE.TextureLoader().load(path + "tex.png");
+
+          // object.traverse(function (child) {
+          //   // aka setTexture
+          //   if (child instanceof THREE.Mesh) {
+          //     child.material.map = texture;
+          //   }
+          // });
+          // object.material.map = texture;
           this.sceneObject.world.scene.add(object);
         });
     });

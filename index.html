@@ -21,32 +21,43 @@
     <canvas id="renderCanvas"></canvas>
     <canvas id="canvasHUD"></canvas>
   </body>
-  <script src="./js/EventEmitter.js"></script>
-  <script src="./js/vectorUtils.js"></script>
-  <script src="./js/ADKeyboardState.js"></script>
-  <script src="./js/Input.js"></script>
-  <script src="./js/InputManager.js"></script>
-  <script src="./js/Component.js"></script>
-  <script src="./js/World.js"></script>
-  <script src="./js/CoSkyBox.js"></script>
-  <script src="./js/CoTransform.js"></script>
-  <script src="./js/CoGUI.js"></script>
-  <script src="./js/CoOrbiter.js"></script>
-  <script src="./js/CoNuclei.js"></script>
-  <script src="./js/CoElectron.js"></script>
-  <script src="./js/CoMicroscope.js"></script>
-  <script src="./js/CoAttractor.js"></script>
-  <script src="./js/CoSubparticleSpawner.js"></script>
+
+  <!-- Models -->
+  <script src="./js/models/World.js"></script>
+  <script src="./js/models/Component.js"></script>
+  <script src="./js/models/SceneObject.js"></script>
+  <script src="./js/models/Mover.js"></script>
+  <script src="./js/models/Attractor.js"></script>
+
+  <!-- Components -->
+  <script src="./js/components/CoSkyBox.js"></script>
+  <script src="./js/components/CoTransform.js"></script>
+  <script src="./js/components/CoGUI.js"></script>
+  <script src="./js/components/CoOrbiter.js"></script>
+  <script src="./js/components/CoNuclei.js"></script>
+  <script src="./js/components/CoElectron.js"></script>
+  <script src="./js/components/CoMicroscope.js"></script>
+  <script src="./js/components/CoAttractor.js"></script>
+  <script src="./js/components/CoSubparticleSpawner.js"></script>
+
+  <!-- Utils -->
+  <script src="./js/utils/randomSpherePoint.js"></script>
+  <script src="./js/utils/Crossfade.js"></script>
+  <script src="./js/utils/clamp.js"></script>
+  <script src="./js/utils/vectorUtils.js"></script>
+  <script src="./js/utils/Input.js"></script>
+  <script src="./js/utils/InputManager.js"></script>
+  <script src="./js/utils/EventEmitter.js"></script>
+  <script src="./js/utils/ADKeyboardState.js"></script>
+
+  <!-- Scenes -->
+  <script src="./js/scenes/ADSceneHUD.js"></script>
+  <script src="./js/scenes/ADScene.js"></script>
+
   <script src="./js/SceneObjectFactory.js"></script>
-  <script src="./js/SceneObject.js"></script>
-  <script src="./js/Crossfade.js"></script>
-  <script src="./js/clamp.js"></script>
-  <script src="./js/Mover.js"></script>
-  <script src="./js/Attractor.js"></script>
-  <script src="./js/ClassicalNoise.js"></script>
-  <script src="./js/randomSpherePoint.js"></script>
-  <script src="./js/ADScene.js"></script>
-  <script src="./js/ADSceneHUD.js"></script>
   <script src="./js/main.js"></script>
   <script src="./js/index.js"></script>
+
+  <!-- TRASH -->
+  <script src="./js/trash/ClassicalNoise.js"></script>
 </html>
