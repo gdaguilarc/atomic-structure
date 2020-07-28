@@ -14,12 +14,23 @@ class CoSubparticleSpawner extends Component {
     this.vehiclesComponents = [];
     this.level = 0;
 
-    this.colors = ["blue", "green", "purple", "yellow"];
+    this.colors = [
+      "blue",
+      "green",
+      "purple",
+      "yellow",
+      "white",
+      "orange",
+      "orange",
+    ];
     this.levelDirections = [
       new THREE.Vector3(1, 1, 0),
       new THREE.Vector3(1, 0, 0),
       new THREE.Vector3(0, 1, 0),
       new THREE.Vector3(1, 0, 0.5),
+      new THREE.Vector3(1, 1, 0),
+      new THREE.Vector3(1, 0, 0),
+      new THREE.Vector3(0, 1, 0),
     ];
   }
 
@@ -45,13 +56,7 @@ class CoSubparticleSpawner extends Component {
       this.electrons.push(electron);
       EventEmitter.getInstance().emit("electronAdded");
 
-      if (
-        this.electrons.length == 2 ||
-        this.electrons.length == 8 ||
-        this.electrons.length == 28
-      ) {
-        this.level += 1;
-      }
+      this.level = this.updateLevel(this.electrons.length);
     }
 
     if (
@@ -60,9 +65,7 @@ class CoSubparticleSpawner extends Component {
     ) {
       const popped = this.electrons.pop();
 
-      if (this.electrons.length == 2 || this.electrons.length == 10) {
-        this.level -= 1;
-      }
+      this.level = this.updateLevel(this.electrons.length);
 
       if (popped) {
         EventEmitter.getInstance().emit("electronRemoved");
@@ -70,10 +73,19 @@ class CoSubparticleSpawner extends Component {
       }
     }
     if (Input.getInstance().isKeyPressed(InputKeyCode.J)) {
-      const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
+      const dir = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      );
       dir.normalize();
       dir.multiplyScalar(150);
-      const proton = SceneObjectFactory.getInstance().createProton(dir, 3, 0.2, 8);
+      const proton = SceneObjectFactory.getInstance().createProton(
+        dir,
+        3,
+        0.2,
+        8
+      );
       const protonComponent = proton.findComponent(CoVehicle.prototype);
 
       this.vehicles.push(proton);
@@ -84,10 +96,19 @@ class CoSubparticleSpawner extends Component {
       EventEmitter.getInstance().emit("protonAdded");
     }
     if (Input.getInstance().isKeyPressed(InputKeyCode.K)) {
-      const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
+      const dir = new THREE.Vector3(
+        Math.random(),
+        Math.random(),
+        Math.random()
+      );
       dir.normalize();
       dir.multiplyScalar(150);
-      const neutron = SceneObjectFactory.getInstance().createNeutron(dir, 3, 0.2, 8);
+      const neutron = SceneObjectFactory.getInstance().createNeutron(
+        dir,
+        3,
+        0.2,
+        8
+      );
       const neutronComponent = neutron.findComponent(CoVehicle.prototype);
 
       this.vehicles.push(neutron);
@@ -99,6 +120,31 @@ class CoSubparticleSpawner extends Component {
     }
     for (let i = 0; i < this.vehicles.length; ++i) {
       this.vehiclesComponents[i].applyBehaviors(this.vehiclesComponents);
+    }
+  }
+
+  updateLevel(electrons) {
+    if (electrons <= 2) {
+      // 2 e
+      return 0;
+    } else if (electrons > 2 && electrons <= 10) {
+      // 8 e
+      return 1;
+    } else if (electrons > 10 && electrons <= 28) {
+      // 18 e
+      return 2;
+    } else if (electrons > 28 && electrons <= 60) {
+      // 32 e
+      return 3;
+    } else if (electrons > 60 && electrons <= 92) {
+      // 32 e
+      return 4;
+    } else if (electrons > 92 && electrons <= 110) {
+      // 18 e
+      return 5;
+    } else if (electrons > 110) {
+      // 8 e
+      return 6;
     }
   }
 
