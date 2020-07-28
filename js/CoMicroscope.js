@@ -19,34 +19,28 @@ class CoMicroscope extends Component {
       }), // UP
     ];
 
-    this.loadObj("./models/obj/orionxt8/", "orionxt8").then((myObj) => {
-      myObj.scale.set(40, 40, 40);
-      myObj.position.set(0, 1900, 7800);
-
-      this.sceneObject.world.scene.add(myObj);
-    });
+    this.loadObj("./models/obj/orionxt8/", "orionxt8");
   }
 
   loadObj(path, fileName) {
-    let progress = console.log;
+    new THREE.MTLLoader().load(path + fileName + ".mtl", (materials) => {
+      materials.preload();
+      new THREE.OBJLoader()
+        .setMaterials(materials)
+        .load(path + fileName + ".obj", (object) => {
+          object.scale.set(50, 50, 50);
+          var texture = new THREE.TextureLoader().load(path + "tex.png");
 
-    return new Promise(function (resolve, reject) {
-      const mtlLoader = new THREE.MTLLoader();
-      mtlLoader.setPath(path);
+          // object.traverse((child) => {
+          //   // aka setTexture
+          //   console.log(child);
 
-      mtlLoader.setMaterials(materials).load(
-        fileName + ".mtl",
-        function (materials) {
-          materials.preload();
-
-          const objLoader = new THREE.OBJLoader();
-          objLoader.setMaterials(materials);
-          objLoader.setPath(path);
-          objLoader.load(fileName + ".obj", resolve, progress, reject);
-        },
-        progress,
-        reject
-      );
+          //   console.log("fdsj");
+          //   child.material = texture;
+          // });
+          object.material.map = texture;
+          this.sceneObject.world.scene.add(object);
+        });
     });
   }
 }

@@ -5,8 +5,8 @@ class CoGUI extends Component {
     super(sceneObject);
 
     this.electronCount = 0;
-    this.electronCountChanged = true;
     this.electronAdded = this.electronAdded.bind(this);
+    this.electronRemoved = this.electronRemoved.bind(this);
   }
 
   init() {
@@ -14,23 +14,27 @@ class CoGUI extends Component {
       "electronAdded",
       this.electronAdded
     );
+    EventEmitter.getInstance().addEventListener(
+      "electronRemoved",
+      this.electronRemoved
+    );
+    CoGUI.components.push(this);
   }
 
   electronAdded() {
     this.electronCount++;
-    this.electronAdded = true;
+  }
+
+  electronRemoved() {
+    this.electronCount--;
   }
 
   update(delta) {
-    if (this.electronCountChanged) {
-      this.sceneObject.world.scene.hudContext.fillText(
-        `Electrons: ${this.electronCount}`,
-        50,
-        50
-      );
-      this.electronCountChanged = false;
-      this.sceneObject.world.scene.hudTexture.needsUpdate = true;
-    }
+    this.sceneObject.world.scene.hudContext.fillText(
+      `Electrons: ${this.electronCount}`,
+      100,
+      100
+    );
   }
 
   destroy() {

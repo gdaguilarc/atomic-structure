@@ -11,8 +11,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd tex.png
-map_Ke tex.png
-map_Ks tex.png
+
+
 
 newmtl Metal
 Ns 96.078431
@@ -24,8 +24,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd tex.png
-map_Ke tex.png
-map_Ks tex.png
 
 newmtl Tube
 Ns 96.078431
@@ -37,5 +35,3 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd tex.png
-map_Ke tex.png
-map_Ks tex.png

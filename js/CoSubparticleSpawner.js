@@ -1,3 +1,5 @@
+// TODO: FIX
+
 class CoSubparticleSpawner extends Component {
   static components = [];
 
@@ -57,6 +59,7 @@ class CoSubparticleSpawner extends Component {
       }
 
       if (popped) {
+        EventEmitter.getInstance().emit("electronRemoved");
         this.sceneObject.world.destroy(popped);
       }
     }

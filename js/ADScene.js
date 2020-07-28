@@ -50,8 +50,7 @@ class ADScene extends THREE.Scene {
 
     // Get 2D context and draw something supercool.
     this.hudContext = this.hudCanvas.getContext("2d");
-    this.hudContext.font = "Normal 40px Arial";
-    this.hudContext.textAlign = "center";
+    this.hudContext.font = "30px Verdana";
     this.hudContext.fillStyle = "rgba(245,245,245,0.75)";
 
     // Create the camera and set the viewport to match the screen dimensions.
@@ -101,6 +100,7 @@ class ADScene extends THREE.Scene {
     );
 
     this.world.update(delta);
+    this.hudTexture.needsUpdate = true;
     // Saves previous state
     InputManager.getInstance().lateUpdate();
 
