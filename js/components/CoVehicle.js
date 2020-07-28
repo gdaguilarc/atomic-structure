@@ -29,7 +29,7 @@ class CoVehicle extends Component {
   applyBehaviors(vehicles) {
     const separateForce = this.separate(vehicles);
     const seekForce = this.seek(this.target);
-    separateForce.multiplyScalar(1);
+    separateForce.multiplyScalar(2);
     seekForce.multiplyScalar(1);
     this.applyForce(separateForce);
     this.applyForce(seekForce);
