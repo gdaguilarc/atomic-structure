@@ -40,10 +40,10 @@ class CoSubparticleSpawner extends Component {
 
   update(delta) {
     if (
-      (Input.getInstance().isKeyPressed(InputKeyCode.UpArrow) ||
-        Input.getInstance().isKeyPressed(InputKeyCode.W)) &&
-      this.protons < 118
+      Input.getInstance().isKeyPressed(InputKeyCode.UpArrow) ||
+      Input.getInstance().isKeyPressed(InputKeyCode.W)
     ) {
+      this.level = this.updateLevel(this.electrons.length);
       const min = 100 * (this.level + 1);
       const max = 100 * (this.level + 1) + 70;
       const distance = Math.random() * (max - min) + min;
@@ -56,8 +56,6 @@ class CoSubparticleSpawner extends Component {
 
       this.electrons.push(electron);
       EventEmitter.getInstance().emit("electronAdded");
-
-      this.level = this.updateLevel(this.electrons.length);
     }
 
     if (
@@ -125,25 +123,25 @@ class CoSubparticleSpawner extends Component {
   }
 
   updateLevel(electrons) {
-    if (electrons <= 2) {
+    if (electrons < 2) {
       // 2 e
       return 0;
-    } else if (electrons > 2 && electrons <= 10) {
+    } else if (electrons >= 2 && electrons < 10) {
       // 8 e
       return 1;
-    } else if (electrons > 10 && electrons <= 28) {
+    } else if (electrons >= 10 && electrons < 28) {
       // 18 e
       return 2;
-    } else if (electrons > 28 && electrons <= 60) {
+    } else if (electrons >= 28 && electrons < 60) {
       // 32 e
       return 3;
-    } else if (electrons > 60 && electrons <= 92) {
+    } else if (electrons >= 60 && electrons < 92) {
       // 32 e
       return 4;
-    } else if (electrons > 92 && electrons <= 110) {
+    } else if (electrons >= 92 && electrons < 110) {
       // 18 e
       return 5;
-    } else if (electrons > 110) {
+    } else if (electrons >= 110) {
       // 8 e
       return 6;
     }
