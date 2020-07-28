@@ -69,6 +69,16 @@ class CoSubparticleSpawner extends Component {
       const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
       dir.normalize();
       dir.multiplyScalar(100);
+      const vehicle = SceneObjectFactory.getInstance().createProton(dir, 2, 0.2, 3);
+      const vehicleComponent = vehicle.findComponent(CoVehicle.prototype);
+
+      this.vehicles.push(vehicle);
+      this.vehiclesComponents.push(vehicleComponent);
+    }
+    if (Input.getInstance().isKeyPressed(InputKeyCode.K)) {
+      const dir = new THREE.Vector3(Math.random(), Math.random(), Math.random());
+      dir.normalize();
+      dir.multiplyScalar(100);
       const vehicle = SceneObjectFactory.getInstance().createNeutron(dir, 2, 0.2, 3);
       const vehicleComponent = vehicle.findComponent(CoVehicle.prototype);
 

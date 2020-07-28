@@ -8,7 +8,7 @@ class CoElectron extends Component {
   }
 
   init() {
-    this.geometry = new THREE.SphereGeometry(10, 21, 21);
+    this.geometry = new THREE.SphereGeometry(5, 21, 21);
     this.material = new THREE.MeshBasicMaterial({ color: this.color });
     this.electron = new THREE.Mesh(this.geometry, this.material);
     this.coTransform = this.sceneObject.findComponent(CoTransform.prototype);

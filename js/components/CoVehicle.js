@@ -29,14 +29,15 @@ class CoVehicle extends Component {
   applyBehaviors(vehicles) {
     const separateForce = this.separate(vehicles);
     const seekForce = this.seek(this.target);
-    separateForce.multiplyScalar(0.5);
+    separateForce.multiplyScalar(0.1);
     seekForce.multiplyScalar(1);
-    this.applyForce(separateForce);
+    // this.applyForce(separateForce);
     this.applyForce(seekForce);
   }
 
   seek(target) {
     const desired = target.clone();
+    console.log(target);
     desired.sub(this.coTransform.location);
     const d = desired.length();
     desired.normalize();
