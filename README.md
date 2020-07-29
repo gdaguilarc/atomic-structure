@@ -1,4 +1,4 @@
-# Atomic Sim
+# Atomic-Structure
 
 Computer Graphics course project at Tecnológico de Monterrey. Educational ThreeJs application for the topic "Atomic Structures"
 
