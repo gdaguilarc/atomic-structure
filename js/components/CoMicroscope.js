@@ -34,7 +34,7 @@ class CoMicroscope extends Component {
       this.mesh.position.set(
         this.sceneObject.world.scene.camera.position.x,
         this.sceneObject.world.scene.camera.position.y - 800,
-        this.sceneObject.world.scene.camera.position.z - 1000
+        this.sceneObject.world.scene.camera.position.z - 2000
       );
       this.mesh.lookAt(this.sceneObject.world.scene.camera.getWorldDirection());
     }

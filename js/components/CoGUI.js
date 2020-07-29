@@ -72,30 +72,36 @@ class CoGUI extends Component {
 
   update(delta) {
     this.sceneObject.world.scene.hudContext.fillText(
-      `Element: ${this.elementManager.getElement(
-        this.protonCount,
-        this.electronCount
-      )}`,
+      `Welcome to Atomic Sim! [W/S] Add/Remove electrons / [J] Add Protons / [K] Add Neutrons`,
       100,
       100
     );
 
     this.sceneObject.world.scene.hudContext.fillText(
-      `Electrons: ${this.electronCount}`,
+      `Element: ${this.elementManager.getElement(
+        this.protonCount,
+        this.electronCount
+      )}`,
       100,
       200
     );
 
     this.sceneObject.world.scene.hudContext.fillText(
-      `Protons: ${this.protonCount}`,
+      `Electrons: ${this.electronCount}`,
       100,
       300
     );
 
     this.sceneObject.world.scene.hudContext.fillText(
-      `Neutrons: ${this.neutronCount}`,
+      `Protons: ${this.protonCount}`,
       100,
       400
+    );
+
+    this.sceneObject.world.scene.hudContext.fillText(
+      `Neutrons: ${this.neutronCount}`,
+      100,
+      500
     );
   }
 

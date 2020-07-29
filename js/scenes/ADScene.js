@@ -43,8 +43,9 @@ class ADScene extends THREE.Scene {
 
     // Get 2D context and draw something supercool.
     this.hudContext = this.hudCanvas.getContext("2d");
-    this.hudContext.font = "30px Verdana";
-    this.hudContext.fillStyle = "rgba(245,245,245,0.75)";
+    this.hudContext.font = "35px Verdana";
+    // this.hudContext.fillStyle = "rgba(245,245,245,0.75)";
+    this.hudContext.fillStyle = "rgba(238, 238, 0, 1)";
 
     // Create the camera and set the viewport to match the screen dimensions.
     this.hudCamera = new THREE.OrthographicCamera(
