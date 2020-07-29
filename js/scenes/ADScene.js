@@ -10,6 +10,10 @@ class ADScene extends THREE.Scene {
       80000
     );
 
+    this.cameraNuclei = new THREE.PerspectiveCamera(45, 0, 1, 80000);
+    this.cameraNuclei.position.set(0, 0, 1000);
+
+    this.multiview = false;
     this.camera.position.set(0, 2000, 8000);
 
     new THREE.OrbitControls(this.camera, canvas);
@@ -23,18 +27,6 @@ class ADScene extends THREE.Scene {
     const nuclei = factory.createNuclei(1000, 10, 50);
     factory.createSubparticleSpawner(nuclei);
     factory.createMicroscope();
-
-    // create an AudioListener and add it to the camera
-    const listener = new THREE.AudioListener();
-    this.camera.add(listener);
-
-    const sound = new THREE.Audio(listener);
-    this.loadSound("", "").then(function (buffer) {
-      sound.setBuffer(buffer);
-      sound.setLoop(true);
-      sound.setVolume(0.05);
-      sound.play();
-    });
 
     this.add(this.scenceLight);
 
@@ -87,12 +79,6 @@ class ADScene extends THREE.Scene {
     // Update the input
     InputManager.getInstance().update();
 
-    if (Input.getInstance().isKeyPressed(InputKeyCode.P)) {
-      console.log("Pressed P");
-      const context = new AudioContext();
-      context.resume();
-    }
-
     this.hudContext.clearRect(
       0,
       0,
@@ -113,16 +99,5 @@ class ADScene extends THREE.Scene {
     this.hudCanvas.width = window.innerWidth;
     this.camera.aspect = this.canvas.width / this.canvas.height;
     this.camera.updateProjectionMatrix();
-  }
-
-  loadSound(path, filename) {
-    let progress = console.log;
-    return new Promise(function (resolve, reject) {
-      // create a global audio source
-
-      // load a sound and set it as the Audio object's buffer
-      const audioLoader = new THREE.AudioLoader();
-      audioLoader.load("sounds/background.mp3", resolve, progress, reject);
-    });
   }
 }

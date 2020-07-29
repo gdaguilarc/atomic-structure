@@ -44,5 +44,8 @@ class World {
     CoGUI.components.forEach((component) => {
       component.update(delta);
     });
+    CoMicroscope.components.forEach((component) => {
+      component.update(delta);
+    });
   }
 }

@@ -61,16 +61,18 @@ class CoVehicle extends Component {
     let count = 0;
     // For every boid in the system, check if it's too close
     for (let i = 0; i < vehicles.length; ++i) {
-      const d = this.coTransform.location.distanceTo(vehicles[i].coTransform.location);
+      const d = this.coTransform.location.distanceTo(
+        vehicles[i].coTransform.location
+      );
       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
-      if ((d > 0) && (d < desiredseparation)) {
+      if (d > 0 && d < desiredseparation) {
         // Calculate vector pointing away from neighbor
         const diff = this.coTransform.location.clone();
         diff.sub(vehicles[i].coTransform.location);
         diff.normalize();
-        diff.divideScalar(d);        // Weight by distance
+        diff.divideScalar(d); // Weight by distance
         sum.add(diff);
-        count++;            // Keep track of how many
+        count++; // Keep track of how many
       }
     }
     // Average -- divide by how many
@@ -93,5 +95,4 @@ class CoVehicle extends Component {
   destroy() {
     this.removeComponentFrom(CoVehicle.components);
   }
-
 }

@@ -1,5 +1,3 @@
-// TODO: FIX
-
 class CoSubparticleSpawner extends Component {
   static components = [];
 

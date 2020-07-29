@@ -10,6 +10,7 @@ const InputKeyCode = {
   K: 7,
   J: 8,
   P: 9,
+  Space: 10,
 };
 
 // Up to 32 states, we won't need more buttons in this case
@@ -27,6 +28,7 @@ const InputKeyCodeBitwise = {
   K: 1 << InputKeyCode.K, // 0000 1000 0000
   J: 1 << InputKeyCode.J, // 0001 0000 0000
   P: 1 << InputKeyCode.P,
+  Space: 1 << InputKeyCode.Space,
 };
 
 class Input {

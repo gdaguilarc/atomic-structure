@@ -1,4 +1,6 @@
 class CoMicroscope extends Component {
+  static components = [];
+
   constructor(sceneObject) {
     super(sceneObject);
   }
@@ -19,7 +21,23 @@ class CoMicroscope extends Component {
       }), // UP
     ];
 
-    this.loadObj("./models/obj/orionxt8/", "orionxt8");
+    this.loadObj(
+      "./models/obj/star-wars-vader-tie-fighter/",
+      "star-wars-vader-tie-fighter"
+    );
+
+    CoMicroscope.components.push(this);
+  }
+
+  update(delta) {
+    if (this.mesh) {
+      this.mesh.position.set(
+        this.sceneObject.world.scene.camera.position.x,
+        this.sceneObject.world.scene.camera.position.y - 800,
+        this.sceneObject.world.scene.camera.position.z - 1000
+      );
+      this.mesh.lookAt(this.sceneObject.world.scene.camera.getWorldDirection());
+    }
   }
 
   loadObj(path, fileName) {
@@ -28,27 +46,14 @@ class CoMicroscope extends Component {
       new THREE.OBJLoader()
         .setMaterials(materials)
         .load(path + fileName + ".obj", (object) => {
-          object.scale.set(50, 50, 50);
-
-          // object.traverse((child) => {
-          //   // aka setTexture
-          //   console.log(child);
-
-          //   console.log("fdsj");
-          //   child.material = texture;
-          // });
-
-          // var texture = new THREE.TextureLoader().load(path + "tex.png");
-
-          // object.traverse(function (child) {
-          //   // aka setTexture
-          //   if (child instanceof THREE.Mesh) {
-          //     child.material.map = texture;
-          //   }
-          // });
-          // object.material.map = texture;
+          object.scale.set(200, 200, 200);
           this.sceneObject.world.scene.add(object);
+          this.mesh = object;
         });
     });
+  }
+
+  destroy() {
+    this.removeComponentFrom(CoMicroscope.components);
   }
 }

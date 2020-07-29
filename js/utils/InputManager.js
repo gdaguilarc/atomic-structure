@@ -5,7 +5,7 @@ class InputManager {
     if (InputManager.instance == null) {
       InputManager.instance = new InputManager();
     }
- 
+
     return InputManager.instance;
   }
 
@@ -69,6 +69,9 @@ class InputManager {
     if (keyboardState.get(AD_KEY.P)) {
       // Turn on the bit that handles the state for that key
       this.input.keyboardState |= InputKeyCodeBitwise.P;
+    }
+    if (keyboardState.get(AD_KEY.SPACE)) {
+      this.input.keyboardState |= InputKeyCodeBitwise.Space;
     }
   }
 }
