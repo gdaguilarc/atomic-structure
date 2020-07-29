@@ -120,27 +120,39 @@ class CoSkyBox extends Component {
 
     const cubeMaterials = [
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_ft.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_ft.png"
+        ),
         side: THREE.DoubleSide,
       }), // FRONT
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_bk.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_bk.png"
+        ),
         side: THREE.DoubleSide,
       }), // BACK
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_up.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_up.png"
+        ),
         side: THREE.DoubleSide,
       }), // UP
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_dn.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_dn.png"
+        ),
         side: THREE.DoubleSide,
       }), // DOWN
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_rt.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_rt.png"
+        ),
         side: THREE.DoubleSide,
       }), // RIGHT
       new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load("img/skybox/elyvisions/sh_lf.png"),
+        map: new THREE.TextureLoader().load(
+          "img/skybox/elyvisions/arch3_lf.png"
+        ),
         side: THREE.DoubleSide,
       }), // LEFT
     ];

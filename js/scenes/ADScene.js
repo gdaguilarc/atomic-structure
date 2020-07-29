@@ -14,7 +14,7 @@ class ADScene extends THREE.Scene {
     this.cameraNuclei.position.set(0, 0, 1000);
 
     this.multiview = false;
-    this.camera.position.set(0, 2000, 8000);
+    this.camera.position.set(0, 2000, 9000);
 
     new THREE.OrbitControls(this.camera, canvas);
     this.scenceLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
